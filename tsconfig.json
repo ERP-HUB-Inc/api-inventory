@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@common/*": ["common/*"],
+      "@interceptors/*": ["common/interceptors/*"],
+      "@middlewares/*": ["common/middlewares/*"],
+      "@guards/*": ["common/guards/*"],
+      "@const/*": ["common/const/*"],
+      "@controllers/*": ["controllers/*"],
+      "@services/item/*": ["containers/item/services/*"],
+      "@entities/item/*": ["containers/item/entities/*"],
+      "@entities/stock/*": ["containers/stock/entities/*"],
+      "@entities/end-of-day-log/*": ["containers/end-of-day-log/entities/*"],
+      "@entities/purchase/*": ["containers/purchase/entities/*"],
+      "@types/*": ["types/*"],
+      "@config/*": ["config/*"]
+    },
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
+  }
+}
