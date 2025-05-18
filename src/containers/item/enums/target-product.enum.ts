@@ -1,4 +1,4 @@
 export enum TargetProductEnum {
-    all = "all",
-    specific = "specific"
+  all = 'all',
+  specific = 'specific',
 }

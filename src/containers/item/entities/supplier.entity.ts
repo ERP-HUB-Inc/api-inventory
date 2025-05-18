@@ -1,25 +1,20 @@
-import { Column, Entity, OneToMany } from "typeorm";
-import Model from "../../../core/common/models/Model";
-import PurchaseOrder from "../../purchase/models/PurchaseOrder";
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '@common/entities/base.entity';
 
-@Entity("Supplier")
-export default class Supplier extends Model {
+@Entity('Supplier')
+export class Supplier extends BaseEntity {
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @Column()
+  description: string;
 
-    @Column()
-    description: string;
+  @Column()
+  clientId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  phoneNumber: string;
 
-    @Column()
-    phoneNumber: string;
-
-    @Column()
-    email: string;
-
-    @OneToMany(() => PurchaseOrder, purchaseOrder => purchaseOrder.supplierId)
-    purchaseOrders: PurchaseOrder[];
+  @Column()
+  email: string;
 }

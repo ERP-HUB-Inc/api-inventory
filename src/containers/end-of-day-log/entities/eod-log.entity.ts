@@ -1,34 +1,40 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class EODLog {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    itemId: string;
+  @Column()
+  itemId: string;
 
-    @Column()
-    userId: string;
+  @Column()
+  userId: string;
 
-    @Column()
-    startQuantity: number;
+  @Column()
+  startQuantity: number;
 
-    @Column()
-    inQuantity: number;
+  @Column()
+  inQuantity: number;
 
-    @Column()
-    outQuantity: number;
+  @Column()
+  outQuantity: number;
 
-    @Column()
-    endQuantity: number;
+  @Column()
+  endQuantity: number;
 
-    @Column()
-    status: number;
+  @Column()
+  status: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

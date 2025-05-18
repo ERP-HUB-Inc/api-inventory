@@ -1,18 +1,17 @@
-import { EntityRepository } from "typeorm";
-import BaseRepository from "../../../core/common/repositories/BaseRepository";
-import { ConsignmentEntry } from "../entities";
+import BaseRepository from '../../../core/common/repositories/BaseRepository';
+import { ConsignmentEntry } from '../entities';
+import { EntityRepository } from 'typeorm';
 
 @EntityRepository(ConsignmentEntry)
-export default class ConsignmentRepository extends BaseRepository<ConsignmentEntry> {
+export default class ConsignmentRepository extends BaseRepository {
+  entityName: string = 'ConsignmentEntry';
 
-    entityName: string = "ConsignmentEntry";
-
-    selectField: string[] = [
-        "id",
-        "locationId",
-        "supplierId",
-        "description",
-        "date",
-        "status"
-    ];
+  selectField: string[] = [
+    'id',
+    'locationId',
+    'supplierId',
+    'description',
+    'date',
+    'status',
+  ];
 }

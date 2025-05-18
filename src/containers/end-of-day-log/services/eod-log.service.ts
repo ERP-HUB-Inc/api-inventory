@@ -1,13 +1,11 @@
-
 import { Injectable } from '@nestjs/common';
 import { EODLogRepository } from '../repositories/eod-log.repository';
 import { EODLog } from '../entities/eod-log.entity';
+import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class EODLogService {
-  constructor(
-    private readonly eodLogRepository: EODLogRepository
-  ) {}
+  constructor(private readonly eodLogRepository: EODLogRepository) {}
 
   /**
    * Creates a new EODLog entry.
@@ -23,10 +21,10 @@ export class EODLogService {
    * @param id - The ID of the EODLog entry.
    * @returns The found EODLog entity or null if not found.
    */
-  async findOne(id: string): Promise<EODLog | null> {
+  async findOne(id: string): Promise<EODLog> {
     return this.eodLogRepository.repository.findOne({
       where: { id },
-      select: this.eodLogRepository.selectField as (keyof EODLog)[]
+      select: this.eodLogRepository.selectField as (keyof EODLog)[],
     });
   }
 
@@ -36,7 +34,7 @@ export class EODLogService {
    */
   async findAll(): Promise<EODLog[]> {
     return this.eodLogRepository.repository.find({
-      select: this.eodLogRepository.selectField as (keyof EODLog)[]
+      select: this.eodLogRepository.selectField as (keyof EODLog)[],
     });
   }
 
@@ -56,8 +54,8 @@ export class EODLogService {
    * @param id - The ID of the EODLog entry to delete.
    * @returns void
    */
-  async delete(id: string): Promise<void> {
-    await this.eodLogRepository.repository.delete(id);
+  async delete(id: string): Promise<DeleteResult> {
+    return await this.eodLogRepository.repository.delete(id);
   }
 
   /**

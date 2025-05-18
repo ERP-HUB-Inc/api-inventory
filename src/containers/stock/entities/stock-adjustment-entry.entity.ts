@@ -1,47 +1,38 @@
-import {
-    Column,
-    Entity,
-    ManyToOne,
-    OneToOne,
-    JoinColumn
-} from "typeorm";
-import { StockAdjustment } from ".";
-import Model from "../../../core/common/models/Model";
-import ProductVariant from "../../item/entities/ProductVariant";
+import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+import { StockAdjustment } from './stock-adjustment.entity';
+import { ProductVariant } from '@item/entities/product-variant.entity';
+import { BaseEntity } from '@common/entities/base.entity';
 
-@Entity("StockAdjustmentEntry")
-export class StockAdjustmentEntry extends Model {
+@Entity('StockAdjustmentEntry')
+export class StockAdjustmentEntry extends BaseEntity {
+  @Column()
+  stockAdjustmentId: string;
 
-    @Column()
-    stockAdjustmentId: string;
+  @Column()
+  productVariantId: string;
 
-    @Column()
-    productVariantId: string;
+  @Column()
+  productName: string;
 
-    @Column()
-    productName: string;
+  @Column()
+  variantName: string;
 
-    @Column()
-    variantName: string;
+  @Column()
+  barcode: string;
 
-    @Column()
-    barcode: string;
+  @Column()
+  currentQuantity: number;
 
-    @Column()
-    currentQuantity: number;
+  @Column()
+  adjustQuantity: number;
 
-    @Column()
-    adjustQuantity: number;
+  @Column()
+  unitId: string;
 
-    @Column()
-    unitId: string;
+  @ManyToOne(() => StockAdjustment, (stockAdjustment) => stockAdjustment.details)
+  stockAdjustment: StockAdjustment;
 
-    @ManyToOne(() => StockAdjustment, stockAdjustment => stockAdjustment.details)
-    stockAdjustment: StockAdjustment;
-
-    @OneToOne(() => ProductVariant)
-    @JoinColumn()
-    productVariant: ProductVariant;
-
-    isApprove: number;
+  @OneToOne(() => ProductVariant)
+  @JoinColumn()
+  productVariant: ProductVariant;
 }

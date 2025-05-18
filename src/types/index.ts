@@ -1,5 +1,5 @@
 export class TokenPayload {
-    sub: string | number;
-    userName: string;
-    scope: string;
+  sub: string | number;
+  userName: string;
+  scope: string;
 }

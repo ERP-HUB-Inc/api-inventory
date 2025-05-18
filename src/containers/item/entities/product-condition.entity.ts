@@ -1,17 +1,11 @@
-import {
-    Column,
-    Entity,
-    PrimaryColumn
-} from "typeorm";
+import { BaseEntity } from '@common/entities/base.entity';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity("ProductCondition")
-export default class ProductCondition {
-    @PrimaryColumn()
-    id: string;
+@Entity('ProductCondition')
+export default class ProductCondition extends BaseEntity {
+  @PrimaryColumn()
+  id: string;
 
-    @Column()
-    clientId: string;
-
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 }

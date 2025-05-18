@@ -1,29 +1,18 @@
-import { Length } from "class-validator";
-import { Column, Entity, ManyToOne } from "typeorm";
-import Model from "../../../core/common/models/Model";
-import ProductAttribute from "./ProductAttribute";
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { BaseEntity } from '@common/entities/base.entity';
+import { ProductAttribute } from './product-attribute.entity';
 
-@Entity("ProductAttributeValue")
-export default class ProductAttributeValue extends Model {
+@Entity('ProductAttributeValue')
+export class ProductAttributeValue extends BaseEntity {
+  @Column()
+  productAttributeId: string;
 
-    @Column()
-    @Length(0, 40)
-    productAttributeId: string = "";
+  @Column()
+  name: string;
 
-    @Column()
-    @Length(0, 100)
-    name: string = "";
+  @Column()
+  description: string;
 
-    @Column()
-    @Length(0, 255)
-    description: string = "";
-
-    @Column()
-    clientId: string;
-
-    tempPAVId: number;
-
-    @ManyToOne(type => ProductAttribute, productAttribute => productAttribute.attributeValues)
-    productAttribute: ProductAttribute;
-
+  @ManyToOne(() => ProductAttribute, (productAttribute) => productAttribute.attributeValues)
+  productAttribute: ProductAttribute;
 }

@@ -1,27 +1,20 @@
-import {
-    Column,
-    Entity
-} from "typeorm";
-import Model from "../../../core/common/models/Model";
+import { BaseEntity } from '@common/entities/base.entity';
+import { Column, Entity } from 'typeorm';
 
-@Entity("Unit")
-export default class Unit extends Model {
+@Entity('Unit')
+export class Unit extends BaseEntity {
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @Column()
+  multiple: number;
 
-    @Column()
-    multiple: number;
+  @Column()
+  label: string;
 
-    @Column()
-    label: string;
+  @Column()
+  isSystem: number;
 
-    @Column()
-    isSystem: number = 0;
-
-    @Column()
-    isDefault: number;
-
-    @Column()
-    clientId: string;
+  @Column()
+  isDefault: number;
 }

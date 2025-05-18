@@ -1,15 +1,14 @@
-import { 
-  Entity, 
-  PrimaryGeneratedColumn, 
-  Column, 
-  CreateDateColumn, 
-  UpdateDateColumn, 
-  PrimaryColumn
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  PrimaryColumn,
 } from 'typeorm';
 
 @Entity()
 export class Session {
-
   @PrimaryColumn({ type: 'binary', length: 16 })
   id: Buffer;
 
@@ -33,5 +32,4 @@ export class Session {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
 }

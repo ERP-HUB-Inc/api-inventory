@@ -1,61 +1,57 @@
 import {
-    Column,
-    Entity,
-    OneToMany,
-    PrimaryColumn,
-    OneToOne,
-    JoinColumn
-} from "typeorm";
-import { StockCountEntry } from ".";
-import Location from "../../../core/setting/models/Location";
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { StockCountEntry } from '.';
+import { BaseEntity } from '@common/entities/base.entity';
 
-@Entity("StockCount")
-export class StockCount {
+@Entity('StockCount')
+export class StockCount extends BaseEntity {
+  @PrimaryColumn()
+  id: string;
 
-    @PrimaryColumn()
-    id: string;
+  @Column()
+  clientId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  locationId: string;
 
-    @Column()
-    locationId: string;
+  @Column()
+  name: string;
 
-    @Column()
-    name: string;
+  @Column()
+  startDate: string;
 
-    @Column()
-    startDate: string;
+  @Column()
+  startTime: string;
 
-    @Column()
-    startTime: string;
+  @Column()
+  endDate: string;
 
-    @Column()
-    endDate: string;
+  @Column()
+  endTime: string;
 
-    @Column()
-    endTime: string;
+  @Column()
+  type: string;
 
-    @Column()
-    type: string;//PARTIAL, FULL
+  @OneToMany(() => StockCountEntry, (stockCountEntry) => stockCountEntry.stockCount)
+  details: StockCountEntry[];
 
-    @Column()
-    status: string;//IN_PROGRESS, PAUSE, COMPLETED
+  @OneToOne(() => Location)
+  @JoinColumn()
+  location: Location;
 
-    @OneToMany(() => StockCountEntry, stockCountEntry => stockCountEntry.stockCount)
-    stockCountEntries: StockCountEntry[];
+  uncounted: number;
 
-    @OneToOne(() => Location)
-    @JoinColumn()
-    location: Location;
+  counted: number;
 
-    uncounted: number;
+  unmatched: number;
 
-    counted: number;
+  matched: number;
 
-    unmatched: number;
-
-    matched: number;
-
-    all: number;
+  all: number;
 }

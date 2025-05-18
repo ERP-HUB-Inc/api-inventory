@@ -1,11 +1,11 @@
+import {
+  configCors,
+  configGlobalInterceptors,
+  configMiddlewares,
+  configSecurity,
+} from '@common/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { 
-  configCors, 
-  configGlobalInterceptors, 
-  configMiddlewares, 
-  configSecurity 
-} from '@common/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,9 +14,8 @@ async function bootstrap() {
   configMiddlewares(app);
   configSecurity(app);
   configGlobalInterceptors(app);
-  
+
   await app.listen(8080);
 }
 
 bootstrap();
-

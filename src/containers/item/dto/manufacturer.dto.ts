@@ -1,89 +1,89 @@
-import { Expose } from "class-transformer";
+import { Expose } from 'class-transformer';
 
 export class ManufacturerCreateDto {
-    @Expose()
-    name: string;
+  @Expose()
+  name: string;
 
-    @Expose()
-    description: string;
+  @Expose()
+  description: string;
 
-    @Expose()
-    address: string;
+  @Expose()
+  address: string;
 
-    @Expose()
-    city: string;
+  @Expose()
+  city: string;
 
-    @Expose()
-    state: string;
+  @Expose()
+  state: string;
 
-    @Expose()
-    country: string;
+  @Expose()
+  country: string;
 
-    @Expose()
-    postalCode: string;
+  @Expose()
+  postalCode: string;
 
-    @Expose()
-    phoneNumber: string;
+  @Expose()
+  phoneNumber: string;
 
-    @Expose()
-    email: string;
+  @Expose()
+  email: string;
 
-    @Expose()
-    website: string;
+  @Expose()
+  website: string;
 
-    @Expose()
-    taxId: string;
+  @Expose()
+  taxId: string;
 
-    @Expose()
-    businessLicense: string;
+  @Expose()
+  businessLicense: string;
 
-    @Expose()
-    establishedDate: Date;
+  @Expose()
+  establishedDate: Date;
 }
 
 export class ManufacturerResponseDto {
-    @Expose()
-    id: string;
-    
-    @Expose()
-    name: string;
+  @Expose()
+  id: string;
 
-    @Expose()
-    description: string;
+  @Expose()
+  name: string;
 
-    @Expose()
-    address: string;
+  @Expose()
+  description: string;
 
-    @Expose()
-    city: string;
+  @Expose()
+  address: string;
 
-    @Expose()
-    state: string;
+  @Expose()
+  city: string;
 
-    @Expose()
-    country: string;
+  @Expose()
+  state: string;
 
-    @Expose()
-    postalCode: string;
+  @Expose()
+  country: string;
 
-    @Expose()
-    phoneNumber: string;
+  @Expose()
+  postalCode: string;
 
-    @Expose()
-    email: string;
+  @Expose()
+  phoneNumber: string;
 
-    @Expose()
-    website: string;
+  @Expose()
+  email: string;
 
-    @Expose()
-    taxId: string;
+  @Expose()
+  website: string;
 
-    @Expose()
-    businessLicense: string;
+  @Expose()
+  taxId: string;
 
-    @Expose()
-    establishedDate: Date;
+  @Expose()
+  businessLicense: string;
 
-    @Expose()
-    status: number;
+  @Expose()
+  establishedDate: Date;
+
+  @Expose()
+  status: number;
 }

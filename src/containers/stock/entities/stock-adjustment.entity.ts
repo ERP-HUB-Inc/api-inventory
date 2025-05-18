@@ -1,54 +1,43 @@
-import {
-    Column,
-    Entity,
-    OneToMany,
-    OneToOne,
-    JoinColumn
-} from "typeorm";
-import { StockAdjustmentEntry } from ".";
-import Model from "../../../core/common/models/Model";
-import Location from "../../../core/setting/models/Location";
-import User from "../../../core/setting/models/User";
+import { Column, Entity, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { BaseEntity } from '@common/entities/base.entity';
+import { User } from '@item/entities/user.entity';
+import { StockAdjustmentEntry } from './stock-adjustment-entry.entity';
 
-@Entity("StockAdjustment")
-export class StockAdjustment extends Model {
+@Entity('StockAdjustment')
+export class StockAdjustment extends BaseEntity {
+  @Column()
+  locationId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  userId: string;
 
-    @Column()
-    locationId: string;
+  @Column()
+  approverId: string;
 
-    @Column()
-    userId: string;
+  @Column()
+  subject: string;
 
-    @Column()
-    approverId: string;
+  @Column()
+  description: string;
 
-    @Column()
-    subject: string;
+  @Column()
+  type: string;
 
-    @Column()
-    description: string;
+  @Column()
+  step: number;
 
-    @Column()
-    type: string;
+  @OneToOne(() => Location)
+  @JoinColumn()
+  location: Location;
 
-    @Column()
-    step: number;
+  @OneToOne(() => User)
+  @JoinColumn()
+  user: User;
 
-    @OneToOne(() => Location)
-    @JoinColumn()
-    location: Location;
+  @OneToOne(() => User)
+  @JoinColumn()
+  approver: User;
 
-    @OneToOne(() => User)
-    @JoinColumn()
-    user: User;
-
-    @OneToOne(() => User)
-    @JoinColumn()
-    approver: User;
-
-    @OneToMany(() => StockAdjustmentEntry, stockAdjustmentEntry => stockAdjustmentEntry.stockAdjustment)
-    details: StockAdjustmentEntry[];
+  @OneToMany(() => StockAdjustmentEntry, (stockAdjustmentEntry) => stockAdjustmentEntry.stockAdjustment)
+  details: StockAdjustmentEntry[];
 }

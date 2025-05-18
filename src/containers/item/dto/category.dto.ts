@@ -1,96 +1,96 @@
-import { Expose, Transform } from "class-transformer";
-import Category from "../entities/Category";
+import { Category } from '@item/entities/index';
+import { Expose, Transform } from 'class-transformer';
 
 export class CategoryCreateDto {
-    @Expose()
-    parentId: string;
-    
-    @Expose()
-    name: string;
+  @Expose()
+  parentId: string;
 
-    @Expose()
-    namekm: string;
+  @Expose()
+  name: string;
 
-    @Expose()
-    namebm: string;
+  @Expose()
+  namekm: string;
 
-    @Expose()
-    image: string;
+  @Expose()
+  namebm: string;
 
-    @Expose()
-    description: string;
+  @Expose()
+  image: string;
 
-    @Expose()
-    label: string;
+  @Expose()
+  description: string;
 
-    @Expose()
-    isDefault: boolean;
+  @Expose()
+  label: string;
 
-    @Expose()
-    isFeature: boolean;
+  @Expose()
+  isDefault: boolean;
+
+  @Expose()
+  isFeature: boolean;
 }
 
 export class CategoryUpdateDto {
-    @Expose()
-    parentId: string;
-    
-    @Expose()
-    name: string;
+  @Expose()
+  parentId: string;
 
-    @Expose()
-    namekm: string;
+  @Expose()
+  name: string;
 
-    @Expose()
-    namebm: string;
+  @Expose()
+  namekm: string;
 
-    @Expose()
-    image: string;
+  @Expose()
+  namebm: string;
 
-    @Expose()
-    description: string;
+  @Expose()
+  image: string;
 
-    @Expose()
-    label: string;
+  @Expose()
+  description: string;
 
-    @Expose()
-    isDefault: boolean;
+  @Expose()
+  label: string;
 
-    @Expose()
-    isFeature: boolean;
+  @Expose()
+  isDefault: boolean;
+
+  @Expose()
+  isFeature: boolean;
 }
 
 export class CategoryResponseDto {
-    @Expose()
-    id: string;
-    
-    @Expose()
-    parentId: string;
-    
-    @Expose()
-    name: string;
+  @Expose()
+  id: string;
 
-    @Expose()
-    namekm: string;
+  @Expose()
+  parentId: string;
 
-    @Expose()
-    namebm: string;
+  @Expose()
+  name: string;
 
-    @Expose()
-    image: string;
+  @Expose()
+  namekm: string;
 
-    @Expose()
-    description: string;
+  @Expose()
+  namebm: string;
 
-    @Expose()
-    label: string;
+  @Expose()
+  image: string;
 
-    @Expose()
-    @Transform(({ value }) => value === 1)
-    isDefault: boolean;
+  @Expose()
+  description: string;
 
-    @Expose()
-    isFeature: boolean;
+  @Expose()
+  label: string;
 
-    @Expose()
-    parent: Category;
+  @Expose()
+  @Transform(({ value }) => value === 1)
+  isDefault: boolean;
+
+  @Expose()
+  isFeature: boolean;
+
+  @Expose()
+  parent: Category;
 }

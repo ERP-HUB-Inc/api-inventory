@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { Brand } from "@entities/item/bran.entity";
+import { BaseRepository } from '@common/repositories/base.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Brand } from '@item/entities/index';
+import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class BrandRepository {
-  constructor(
-    @InjectRepository(Brand)
-    public readonly repository: Repository<Brand>
-  ) {}
+export class BrandRepository extends BaseRepository<Brand> {
+  constructor(@InjectRepository(Brand) readonly repository: Repository<Brand>) {
+    super(repository);
+  }
 }

@@ -1,52 +1,46 @@
 import {
-    Column,
-    Entity,
-    JoinColumn,
-    OneToOne,
-    ManyToOne,
-    PrimaryColumn
-} from "typeorm";
-import ProductVariant from "./ProductVariant";
-import PromotionCriteria from "./PromotionCriteria";
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  ManyToOne
+} from 'typeorm';
+import { PromotionCriteria } from './promotion-criteria.entity';
+import { ProductVariant } from './product-variant.entity';
+import { BaseEntity } from '@common/entities/base.entity';
 
-@Entity("PromotionCriteriaProduct")
-export default class PromotionCriteriaProduct {
-    @PrimaryColumn()
-    id: string;
+@Entity('PromotionCriteriaProduct')
+export class PromotionCriteriaProduct extends BaseEntity  {
+  @Column()
+  promotionId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  promotionCriteriaId: string;
 
-    @Column()
-    promotionId: string;
+  @Column()
+  productId: string;
 
-    @Column()
-    promotionCriteriaId: string;
+  @Column()
+  productVariantId: string;
 
-    @Column()
-    productId: string;
+  @Column()
+  productName: string;
 
-    @Column()
-    productVariantId: string;
+  @Column()
+  barcode: string;
 
-    @Column()
-    productName: string;
+  @Column()
+  type: string;
 
-    @Column()
-    barcode: string;
+  @OneToOne(() => ProductVariant, (productVariant: ProductVariant) => productVariant.promotionCriteriaProduct)
+  @JoinColumn()
+  productVariant: ProductVariant;
 
-    @Column()
-    type: string;
+  @ManyToOne(() => PromotionCriteria, (promotionCriteria: PromotionCriteria) => promotionCriteria.buyQuantity,)
+  @JoinColumn({ name: 'promotionCriteriaId' })
+  buyCriteria: PromotionCriteria;
 
-    @OneToOne(() => ProductVariant, productVariant => productVariant.promotionCriteriaProduct)
-    @JoinColumn()
-    productVariant: ProductVariant;
-
-    @ManyToOne(() => PromotionCriteria, promotionCriteria => promotionCriteria.buyQuantity)
-    @JoinColumn({name: "promotionCriteriaId"})
-    buyCriteria: PromotionCriteria;
-
-    @ManyToOne(() => PromotionCriteria, promotionCriteria => promotionCriteria.thenGetProducts)
-    @JoinColumn({name: "promotionCriteriaId"})
-    thenCriteria: PromotionCriteria;
+  @ManyToOne(() => PromotionCriteria, (promotionCriteria: PromotionCriteria) => promotionCriteria.thenGetProducts)
+  @JoinColumn({ name: 'promotionCriteriaId' })
+  thenCriteria: PromotionCriteria;
 }

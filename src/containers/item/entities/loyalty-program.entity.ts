@@ -1,45 +1,31 @@
 import {
-    Column,
-    Entity,
-    OneToMany,
-    PrimaryColumn,
-    UpdateDateColumn,
-    CreateDateColumn
-} from "typeorm";
-import Reward from "./Reward";
+  Column,
+  Entity,
+  OneToMany,
+} from 'typeorm';
+import { Reward } from './reward.entity';
+import { BaseEntity } from '@common/entities/base.entity';
 
-@Entity("LoyaltyProgram")
-export default class LoyaltyProgram {
-    @PrimaryColumn()
-    id: string;
+@Entity('LoyaltyProgram')
+export class LoyaltyProgram extends BaseEntity {
+  @Column()
+  locationId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  name: string;
 
-    @Column()
-    locationId: string;
+  @Column()
+  pointPerAmount: number;
 
-    @Column()
-    name: string;
+  @Column()
+  pointPerOrder: number;
 
-    @Column()
-    pointPerAmount: number;
+  @Column()
+  pointPerProduct: number;
 
-    @Column()
-    pointPerOrder: number;
+  @Column()
+  pointIncreament: number;
 
-    @Column()
-    pointPerProduct: number;
-
-    @Column()
-    pointIncreament: number;
-
-    @OneToMany(() => Reward, reward => reward.loyaltyProgram)
-    rewards: Reward[];
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @OneToMany(() => Reward, (reward) => reward.loyaltyProgram)
+  rewards: Reward[];
 }

@@ -43,7 +43,6 @@ ERP HUB API Gateway is a centralized gateway service built with NestJS to handle
 - 🔍 **Request Filtering Middleware** for header and payload hygiene
 - 📈 **Scalable Architecture** designed for enterprise ERP platforms
 
-
 ## 🔐 Security & Stability Features
 
 This API Gateway is enhanced with several production-grade features to ensure better security, stability, and resilience:
@@ -68,11 +67,11 @@ This API Gateway is enhanced with several production-grade features to ensure be
 
 ### 🔒 CSRF Protection
 
-  This repository implements **CSRF (Cross-Site Request Forgery) protection** using the `csurf` middleware. It helps secure routes by generating and validating CSRF tokens, preventing unauthorized commands from being executed on behalf of authenticated users.
+This repository implements **CSRF (Cross-Site Request Forgery) protection** using the `csurf` middleware. It helps secure routes by generating and validating CSRF tokens, preventing unauthorized commands from being executed on behalf of authenticated users.
 
-  - Middleware: [`csurf`](https://github.com/marcojourney/csurf)
-  - Protection enabled on sensitive routes
-  - Tokens are stored via cookies or session, depending on the configuration
+- Middleware: [`csurf`](https://github.com/marcojourney/csurf)
+- Protection enabled on sensitive routes
+- Tokens are stored via cookies or session, depending on the configuration
 
 ✅ **Security-first design** ensures protection against common web attack vectors.
 
@@ -94,15 +93,14 @@ This API Gateway is enhanced with several production-grade features to ensure be
 - **Response:**
   ```json
   { "ok": true }
-
+  ```
 
 ## 📦 Modules Communicated (via HTTP)
 
 - `Stock-Service`
 - `HR-Service`
 - `Accounting-Service`
-- *(More coming soon)*
-
+- _(More coming soon)_
 
 ## Installation
 
@@ -138,7 +136,6 @@ $ npm run test:cov
 
 ## Conventional Commit Format
 
-
 - **type**: the kind of change you're making.
 - **scope** (optional): the area of the codebase the change affects.
 - **summary**: a brief description of the change, written in **imperative mood** (e.g., "add", "fix", not "added" or "fixed").
@@ -147,18 +144,18 @@ $ npm run test:cov
 
 ### 🔧 Common Types
 
-| Type     | Description                                      |
-|----------|--------------------------------------------------|
-| `feat`   | A new feature                                     |
-| `fix`    | A bug fix                                         |
-| `docs`   | Documentation changes                             |
-| `style`  | Code style changes (formatting, etc.)             |
+| Type       | Description                                    |
+| ---------- | ---------------------------------------------- |
+| `feat`     | A new feature                                  |
+| `fix`      | A bug fix                                      |
+| `docs`     | Documentation changes                          |
+| `style`    | Code style changes (formatting, etc.)          |
 | `refactor` | Code refactoring (no functionality change)     |
-| `test`   | Adding or updating tests                          |
-| `chore`  | Maintenance tasks (build tools, configs, etc.)    |
-| `perf`   | Performance improvements                          |
-| `build`  | Changes that affect the build system              |
-| `ci`     | Changes to CI/CD pipelines                        |
+| `test`     | Adding or updating tests                       |
+| `chore`    | Maintenance tasks (build tools, configs, etc.) |
+| `perf`     | Performance improvements                       |
+| `build`    | Changes that affect the build system           |
+| `ci`       | Changes to CI/CD pipelines                     |
 
 ---
 
@@ -168,6 +165,7 @@ This project is licensed under the **CC BY-NC 4.0 License** — for **non-commer
 See the [LICENSE](./LICENSE) file for details.
 
 ## 📚 Resources
+
 - Conventional Commits Official Site (https://www.conventionalcommits.org/)
 - Semantic Release (https://semantic-release.gitbook.io/)
 - Git Commit Message Guidelines (Chris Beams) (https://chris.beams.io/posts/git-commit/)

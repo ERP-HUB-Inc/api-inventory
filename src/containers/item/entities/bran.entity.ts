@@ -1,34 +1,25 @@
+import { BaseEntity } from '@common/entities/base.entity';
+import { Product } from '@item/entities/product.entity';
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn
-} from "typeorm";
+  Column,
+  Entity,
+  OneToMany,
+} from 'typeorm';
 
 @Entity()
-export class Brand {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
-    
-    @Column()
-    name: string;
+export class Brand extends BaseEntity {
+  @Column()
+  name: string;
 
-    @Column()
-    image: string;
+  @Column()
+  image: string;
 
-    @Column()
-    description: string;
+  @Column()
+  description: string;
 
-    @Column()
-    isDefault: number;
+  @Column()
+  isDefault: number;
 
-    @Column()
-    status: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @OneToMany(() => Product, product => product.brand)
+  products: Product[];
 }

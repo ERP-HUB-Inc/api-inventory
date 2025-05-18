@@ -1,303 +1,257 @@
 import {
-    Column,
-    Entity,
-    OneToMany,
-    ManyToMany,
-    JoinTable,
-    ManyToOne,
-    OneToOne,
-    JoinColumn,
-    PrimaryColumn,
-    CreateDateColumn,
-    UpdateDateColumn
-} from "typeorm";
-import { Expose, Transform } from "class-transformer";
-import Category from "./Category";
-import Tag from "./Tag";
-import Condition from "./Condition";
-import Brand from "./Brand";
-import ProductAttribute from "./ProductAttribute";
-import Supplier from "./Supplier";
-import ProductImage from "./ProductImage";
-import ProductTag from "./ProductTag";
-import ProductVariant from "./ProductVariant";
-import Unit from "./Unit";
-import Tax from "../../../sales/setting/models/Tax";
-import Model from "../../../core/common/models/Model";
-// import { UUIDBinary } from "../../../../utils/uuid-buffer";
-
-@Entity("Product")
-export default class Product extends Model {
-
-    // @PrimaryColumn('binary', { length: 16 })
-    // @Transform(({ value }) => { console.log("Dddd:", value.length); return UUIDBinary.getInstance().fromBuffer(value) })
-    // id: Buffer;
-
-    @ManyToMany(() => Tag)
-    @JoinTable({
-        name: "ProductTag",
-        joinColumns: [
-            { name: 'productId' }
-        ],
-        inverseJoinColumns: [
-            { name: 'tagId' }
-        ]
-    })
-    tags: Tag[];
-
-    @ManyToMany(() => Product)
-    @JoinTable({
-        name: "ProductPackage",
-        joinColumns: [
-            { name: 'productId' }
-        ],
-        inverseJoinColumns: [
-            { name: 'rawProductId' }
-        ]
-    })
-    rawProducts: Product[];
-
-    @ManyToMany(() => Product)
-    @JoinTable({
-        name: "ProductPackage",
-        joinColumns: [
-            { name: 'rawProductId' }
-        ],
-        inverseJoinColumns: [
-            { name: 'productId' }
-        ]
-    })
-    products: Product[];
-
-    @Column()
-    clientId: string;
-
-    @Column()
-    @Expose()
-    categoryId: string;
-
-    @Column()
-    @Expose()
-    brandId: string;
-
-    @Column()
-    @Expose()
-    unitOfMeasurementId: string;
-
-    @Column()
-    @Expose()
-    stockUnitId: string;
-
-    @Column()
-    @Expose()
-    sellUnitId: string;
-
-    @Column()
-    @Expose()
-    unitConversion: number;
-
-    @Column()
-    @Expose()
-    defaultLocationId: string;
-
-    @Column()
-    @Expose()
-    taxId: string;
+  Column,
+  Entity,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
+  OneToOne,
+  JoinColumn
+} from 'typeorm';
+import { Expose } from 'class-transformer';
+import { ProductAttribute } from './product-attribute.entity';
+import { ProductVariant } from './product-variant.entity';
+import { ProductImage } from './product-image.entity';
+import { ProductTag } from './product-tag.entity';
+import { ProductCondition } from './condition.entity';
+import { Category } from './category.entity';
+import { Supplier } from './supplier.entity';
+import { Brand } from './bran.entity';
+import { Unit } from './unit.entity';
+import { BaseEntity } from '@common/entities/base.entity';
+
+@Entity('Product')
+export class Product extends BaseEntity {
+  @ManyToMany(() => Product)
+  @JoinTable({
+    name: 'ProductPackage',
+    joinColumns: [{ name: 'productId' }],
+    inverseJoinColumns: [{ name: 'rawProductId' }],
+  })
+  rawProducts: Product[];
+
+  @ManyToMany(() => Product)
+  @JoinTable({
+    name: 'ProductPackage',
+    joinColumns: [{ name: 'rawProductId' }],
+    inverseJoinColumns: [{ name: 'productId' }],
+  })
+  products: Product[];
+
+  @Column()
+  clientId: string;
+
+  @Column()
+  @Expose()
+  categoryId: string;
+
+  @Column()
+  @Expose()
+  brandId: string;
+
+  @Column()
+  @Expose()
+  unitOfMeasurementId: string;
+
+  @Column()
+  @Expose()
+  stockUnitId: string;
+
+  @Column()
+  @Expose()
+  sellUnitId: string;
+
+  @Column()
+  @Expose()
+  unitConversion: number;
+
+  @Column()
+  @Expose()
+  defaultLocationId: string;
+
+  @Column()
+  @Expose()
+  taxId: string;
+
+  @Column()
+  @Expose()
+  supplierId: string;
+
+  @Column()
+  @Expose()
+  preferredSupplierId: string;
+
+  @Column()
+  @Expose()
+  manufacturerId: string;
+
+  @Column()
+  @Expose()
+  supplierItemCode: string;
+
+  @Column()
+  @Expose()
+  purchasePrice: number;
+
+  @Column()
+  @Expose()
+  supplierPercentage: number;
+
+  @Column()
+  @Expose()
+  conditionId: string;
+
+  @Column()
+  @Expose()
+  name: string;
+
+  @Column()
+  @Expose()
+  namekm: string;
 
-    @Column()
-    @Expose()
-    supplierId: string;
+  @Column()
+  @Expose()
+  namebm: string;
 
-    @Column()
-    @Expose()
-    preferredSupplierId: string;
+  @Column()
+  @Expose()
+  minPrice: number;
 
-    @Column()
-    @Expose()
-    manufacturerId: string;
+  @Column()
+  @Expose()
+  description: string;
 
-    @Column()
-    @Expose()
-    supplierItemCode: string;
+  @Column()
+  @Expose()
+  specification: string;
 
-    @Column()
-    @Expose()
-    purchasePrice: number;
+  @Column()
+  @Expose()
+  highlightTag: string;
 
-    @Column()
-    @Expose()
-    supplierPercentage: number;
+  @Column()
+  @Expose()
+  image: string;
 
-    @Column()
-    @Expose()
-    conditionId: string;
+  @Column()
+  @Expose()
+  videoUrl: string;
 
-    @Column()
-    @Expose()
-    name: string;
+  @Column()
+  @Expose()
+  enableInventoryTracking: boolean;
 
-    @Column()
-    @Expose()
-    namekm: string;
+  @Column()
+  @Expose()
+  serialType: number;
 
-    @Column()
-    @Expose()
-    namebm: string;
+  @Column()
+  @Expose()
+  reorderPoint: number;
 
-    @Column()
-    @Expose()
-    minPrice: number;
+  @Column()
+  @Expose()
+  soldQuantity: number;
 
-    @Column()
-    @Expose()
-    description: string;
+  @Column()
+  @Expose()
+  shippingFee: number;
 
-    @Column()
-    @Expose()
-    specification: string;
+  @Column()
+  @Expose()
+  tag: string;
 
-    @Column()
-    @Expose()
-    highlightTag: string;
+  @Column()
+  @Expose()
+  isAvialableSale: boolean;
 
-    @Column()
-    @Expose()
-    image: string;
+  @Column()
+  @Expose()
+  isPublic: boolean;
 
-    @Column()
-    @Expose()
-    videoUrl: string;
+  @Column()
+  @Expose()
+  isSplittable: boolean;
 
-    @Column()
-    @Expose()
-    enableInventoryTracking: boolean;
+  @Column({ default: false })
+  @Expose()
+  enableDescription: boolean;
 
-    @Column()
-    @Expose()
-    serialType: number;
+  @Column()
+  @Expose()
+  warrantyDuration: number;
 
-    @Column()
-    @Expose()
-    reorderPoint: number;
+  @Column()
+  @Expose()
+  warrantyDurationType: string;
 
-    @Column()
-    @Expose()
-    soldQuantity: number;
+  @Column()
+  @Expose()
+  isFeatured: boolean;
 
-    @Column()
-    @Expose()
-    shippingFee: number;
+  @Column()
+  @Expose()
+  isAutoGenerateBarcode: number;
 
-    @Column()
-    @Expose()
-    tag: string;
+  @Column()
+  @Expose()
+  isAutoGenerateSKU: number;
 
-    @Column()
-    @Expose()
-    isAvialableSale: boolean;
+  @Column()
+  @Expose()
+  type: number;
 
-    @Column()
-    @Expose()
-    isPublic: boolean;
+  @Column()
+  @Expose()
+  productOption: number;
 
-    @Column()
-    @Expose()
-    isSplittable: boolean;
+  @ManyToOne(() => Brand, (brand) => brand.products)
+  brand: Brand;
 
-    @Column({ default: false })
-    @Expose()
-    enableDescription: boolean;
+  @OneToOne(() => Unit)
+  @JoinColumn()
+  unitOfMeasurement: Unit;
 
-    @Column()
-    @Expose()
-    warrantyDuration: number;
+  @OneToOne(() => Unit)
+  @JoinColumn()
+  stockUnit: Unit;
 
-    @Column()
-    @Expose()
-    warrantyDurationType: string;
+  @OneToOne(() => Unit)
+  @JoinColumn()
+  sellUnit: Unit;
 
-    @Column()
-    @Expose()
-    isFeatured: boolean;
+  @OneToOne(() => ProductCondition)
+  @JoinColumn()
+  condition: ProductCondition;
 
-    @Column()
-    @Expose()
-    isAutoGenerateBarcode: number;
+  @OneToOne(() => Supplier)
+  @JoinColumn()
+  supplier: Supplier;
 
-    @Column()
-    @Expose()
-    isAutoGenerateSKU: number;
+  @ManyToOne(() => Category, (Category) => Category.products)
+  category: Category;
 
-    @Column()
-    @Expose()
-    type: number;
+  @OneToMany(() => ProductImage, (productImage) => productImage.product)
+  productImages: ProductImage[];
 
-    @Column()
-    @Expose()
-    productOption: number;
+  @OneToMany(() => ProductTag, (productTag) => productTag.productToProductTag)
+  productTagToProduct: ProductTag[];
 
-    // @Column({ default: 1, comment: "1=active, 0=deactive" })
-    // @Expose()
-    // status: number = 1;
+  @OneToMany(() => ProductAttribute, productAttribute => productAttribute.product)
+  productAttributes: ProductAttribute[];
 
-    // @CreateDateColumn()
-    // createdAt: Date;
+  @OneToMany(() => ProductVariant, (productVariant) => productVariant.product)
+  productVariants: ProductVariant[];
 
-    // @UpdateDateColumn()
-    // updatedAt: Date;
+  barcode: string;
 
-    @ManyToOne(() => Brand, brand => brand.products)
-    brand: Brand;
+  sku: string;
 
-    @OneToOne(() => Unit)
-    @JoinColumn()
-    unitOfMeasurement: Unit;
+  price: number;
 
-    @OneToOne(() => Unit)
-    @JoinColumn()
-    stockUnit: Unit;
+  wholePrice: number;
 
-    @OneToOne(() => Unit)
-    @JoinColumn()
-    sellUnit: Unit;
+  distributePrice: number;
 
-    @OneToOne(() => Condition)
-    @JoinColumn()
-    condition: Condition;
-
-    @OneToOne(() => Supplier)
-    @JoinColumn()
-    supplier: Supplier;
-
-    @ManyToOne(() => Category, Category => Category.products)
-    category: Category;
-
-    @OneToMany(() => ProductImage, productImage => productImage.product)
-    productImages: ProductImage[];
-
-    @OneToOne(() => Tax)
-    @JoinColumn()
-    tax: Tax;
-
-    @OneToMany(() => ProductTag, productTag => productTag.productToProductTag)
-    productTagToProduct: ProductTag[];
-
-    @OneToMany(() => ProductAttribute, productAttribute => productAttribute.product)
-    productAttributes: ProductAttribute[];
-
-    @OneToMany(() => ProductVariant, productVariant => productVariant.product)
-    productVariants: ProductVariant[];
-
-    barcode: string;
-
-    sku: string;
-
-    price: number;
-
-    wholePrice: number;
-
-    distributePrice: number;
-
-    factoryCost: number;
-    
+  factoryCost: number;
 }

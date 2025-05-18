@@ -1,13 +1,13 @@
-import { getCustomRepository } from "typeorm";
-import { Service } from "typedi";
-import BaseService from "../../../core/common/services/BaseService";
-import Product from "../entities/Product";
-import ProductRepository from "../repositories/ItemRepository";
+import BaseService from '../../../core/common/services/BaseService';
+import ProductRepository from '../repositories/ItemRepository';
+import { getCustomRepository } from 'typeorm';
+import Product from '../entities/Product';
+import { Service } from 'typedi';
 
 @Service()
-export default class ProductSeachService extends BaseService<Product> {
-    constructor() {
-        super();
-        this.repository = getCustomRepository(ProductRepository);
-    }
+export default class ProductSeachService extends BaseService {
+  constructor() {
+    super();
+    this.repository = getCustomRepository(ProductRepository);
+  }
 }

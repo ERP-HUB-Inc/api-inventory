@@ -1,23 +1,22 @@
-import { EntityRepository } from "typeorm";
-import BaseRepository from "../../../core/common/repositories/BaseRepository";
-import Supplier from "../entities/Supplier";
+import BaseRepository from '../../../core/common/repositories/BaseRepository';
+import Supplier from '../entities/Supplier';
+import { EntityRepository } from 'typeorm';
 
 @EntityRepository(Supplier)
-export default class SupplierRepository extends BaseRepository<Supplier> {
+export default class SupplierRepository extends BaseRepository {
+  entityName: string = 'Supplier';
 
-    entityName: string = "Supplier";
+  selectField: string[] = [
+    'id',
+    'clientId',
+    'name',
+    'description',
+    'phoneNumber',
+    'email',
+    'status',
+    'createdAt',
+    'updatedAt',
+  ];
 
-    selectField: string[] = [
-        "id",
-        "clientId",
-        "name",
-        "description",
-        "phoneNumber",
-        "email",
-        "status",
-        "createdAt",
-        "updatedAt"
-    ];
-
-    defaultOrder: string[] = ["name", "ASC"];
+  defaultOrder: string[] = ['name', 'ASC'];
 }

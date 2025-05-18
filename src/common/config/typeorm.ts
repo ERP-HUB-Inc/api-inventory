@@ -1,6 +1,6 @@
-import { registerAs } from '@nestjs/config';
-import { config as dotenvConfig } from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { config as dotenvConfig } from 'dotenv';
+import { registerAs } from '@nestjs/config';
 
 dotenvConfig({ path: '.env' });
 
@@ -21,7 +21,8 @@ export default registerAs('typeorm', () => config);
 
 export const connectionSource = new DataSource(config as DataSourceOptions);
 
-connectionSource.initialize()
+connectionSource
+  .initialize()
   .then(() => {
     console.log('Data Source has been initialized!');
   })

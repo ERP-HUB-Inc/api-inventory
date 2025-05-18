@@ -1,23 +1,12 @@
-import { EntityRepository } from "typeorm";
-import BaseRepository from "../../../core/common/repositories/BaseRepository";
-import Attribute from "../entities/Attribute";
+import { BaseRepository } from '@common/repositories/base.repository';
+import { Attribute } from '@item/entities/attribute.entity';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-@EntityRepository(Attribute)
-export default class AttributeRepository extends BaseRepository<Attribute> {
-
-    entityName: string = "Attribute";
-
-    selectField: string[] = [
-        "clientId",
-        "id",
-        "name",
-        "description",
-        "status",
-        "createdAt",
-        "updatedAt"
-    ];
-
-    constructor() {
-        super();
-    }
+@Injectable()
+export class AttributeRepository  extends BaseRepository<Attribute>  {
+  constructor(@InjectRepository(Attribute) readonly repository: Repository<Attribute>) {
+    super(repository);
+  }
 }

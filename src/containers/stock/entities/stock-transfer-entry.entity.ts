@@ -1,48 +1,41 @@
-import {
-    Column,
-    Entity,
-    ManyToOne,
-    OneToOne,
-    JoinColumn
-} from "typeorm";
-import { StockTransfer } from ".";
-import ProductVariant from "../../item/entities/ProductVariant";
-import Model from "../../../core/common/models/Model";
+import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+import { StockTransfer } from '.';
+import { BaseEntity } from '@common/entities/base.entity';
+import { ProductVariant } from '@item/entities/index';
 
-@Entity("StockTransferEntry")
-export class StockTransferEntry extends Model {
+@Entity('StockTransferEntry')
+export class StockTransferEntry extends BaseEntity {
+  @Column()
+  stockTransferId: string;
 
-    @Column()
-    stockTransferId: string;
+  @Column()
+  productVariantId: string;
 
-    @Column()
-    productVariantId: string;
+  @Column()
+  productName: string;
 
-    @Column()
-    productName: string;
+  @Column()
+  variantName: string;
 
-    @Column()
-    variantName: string;
+  @Column()
+  barcode: string;
 
-    @Column()
-    barcode: string;
+  @Column()
+  transferQuantity: number;
 
-    @Column()
-    transferQuantity: number;
+  @Column()
+  receiveQuantity: number;
 
-    @Column()
-    receiveQuantity: number;
+  @Column()
+  price: number;
 
-    @Column()
-    price: number;
+  @Column()
+  unitId: string;
 
-    @Column()
-    unitId: string ;
+  @ManyToOne(() => StockTransfer, (stockTransfer) => stockTransfer.stockTransferEntries)
+  stockTransfer: StockTransfer;
 
-    @ManyToOne(() => StockTransfer, stockTransfer => stockTransfer.stockTransferEntries)
-    stockTransfer: StockTransfer;
-
-    @OneToOne(() => ProductVariant)
-    @JoinColumn()
-    productVariant: ProductVariant;
+  @OneToOne(() => ProductVariant)
+  @JoinColumn()
+  productVariant: ProductVariant;
 }

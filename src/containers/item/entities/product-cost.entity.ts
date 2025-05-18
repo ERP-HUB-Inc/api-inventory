@@ -1,49 +1,29 @@
-import { Length, Max } from "class-validator";
-import { Column, Entity, ManyToOne, JoinColumn, OneToOne } from "typeorm";
-import User from "../../../core/setting/models/User";
-import PurchaseOrder from "../../purchase/models/PurchaseOrder";
-import Model from "../../../core/common/models/Model";
-import Product from "./Product";
-import ProductVariant from "./ProductVariant";
+import { Column, Entity, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
+import { BaseEntity } from '@common/entities/base.entity';
+import { ProductVariant } from './product-variant.entity';
+import { User } from './user.entity';
 
+@Entity('ProductCost')
+export class ProductCost extends BaseEntity {
+  @Column()
+  productVariantId: string;
 
-@Entity("ProductCost")
-export default class ProductCost extends Model {
+  @Column()
+  purchaseOrderId: string;
 
-    // @Column()
-    // @Length(0, 50)
-    // productId: string = "";
+  @Column()
+  userId: string;
 
-    @Column()
-    @Length(0, 50)
-    productVariantId: string = "";
+  @Column()
+  date: Date;
 
-    @Column()
-    @Length(0, 50)
-    purchaseOrderId: string = "";
+  @Column()
+  cost: number;
 
-    @Column()
-    @Length(0, 50)
-    userId: string = "";
+  @ManyToOne(() => ProductVariant, (productVariant: ProductVariant) => productVariant.productCosts)
+  productVariant: ProductVariant;
 
-    @Column()
-    clientId: string;
-
-    @Column()
-    date: Date;
-
-    @Column()
-    @Max(10)
-    cost: number;
-
-    @ManyToOne(type => ProductVariant, productVariant => productVariant.productCosts)
-    productVariant: ProductVariant;
-
-    @OneToOne(type => User)
-    @JoinColumn()
-    user: User;
-
-    @OneToOne(type => PurchaseOrder)
-    @JoinColumn()
-    purchaseOrder: PurchaseOrder;
+  @OneToOne(() => User)
+  @JoinColumn()
+  user: User;
 }

@@ -1,0 +1,11 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "plugins": ["prettier-plugin-sort-imports"],
+  "importOrder": ["^@nestjs/(.*)$", "^@/(.*)$", "^[a-zA-Z].*$", "^\\..*"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

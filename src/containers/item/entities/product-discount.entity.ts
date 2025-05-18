@@ -1,48 +1,38 @@
-import {
-    Column,
-    Entity,
-    OneToOne,
-    JoinColumn,
-    ManyToOne
-} from "typeorm";
-import ProductVariant from "./ProductVariant";
-import Model from "../../../core/common/models/Model";
-import Promotion from "./Promotion";
+import { Column, Entity, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity } from '@common/entities/base.entity';
+import { ProductVariant } from './product-variant.entity';
+import Promotion from './promotion.entity';
 
-@Entity("ProductDiscount")
-export default class ProductDiscount extends Model {
-    
-    @Column()
-    clientId: string;
+@Entity('ProductDiscount')
+export class ProductDiscount extends BaseEntity {
+  @Column()
+  promotionId: string;
 
-    @Column()
-    promotionId: string;
+  @Column()
+  productId: string;
 
-    @Column()
-    productId: string;
+  @Column()
+  productVariantId: string;
 
-    @Column()
-    productVariantId: string;
+  @Column()
+  variantName: string;
 
-    @Column()
-    variantName: string;
+  @Column()
+  quantity: number;
 
-    @Column()
-    quantity: number;
+  @Column()
+  price: number;
 
-    @Column()
-    price: number;
+  @Column()
+  dateStart: Date;
 
-    @Column()
-    dateStart: Date;
+  @Column()
+  dateEnd: Date;
 
-    @Column()
-    dateEnd: Date;
+  @OneToOne(() => ProductVariant)
+  @JoinColumn()
+  productVariant: ProductVariant;
 
-    @OneToOne(() => ProductVariant)
-    @JoinColumn()
-    productVariant: ProductVariant;
-
-    @ManyToOne(() => Promotion, promotion => promotion.productDiscount)
-    promotion: Promotion;
+  @ManyToOne(() => Promotion, (promotion: Promotion) => promotion.productDiscount)
+  promotion: Promotion;
 }

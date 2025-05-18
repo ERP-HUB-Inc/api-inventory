@@ -1,31 +1,21 @@
-import {
-    Column,
-    Entity,
-    ManyToOne,
-    PrimaryColumn
-} from "typeorm";
-import LoyaltyProgram from "./LoyaltyProgram";
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { LoyaltyProgram } from './loyalty-program.entity';
+import { BaseEntity } from '@common/entities/base.entity';
 
-@Entity("Reward")
-export default class Reward {
-    @PrimaryColumn()
-    id: string;
+@Entity('Reward')
+export class Reward extends BaseEntity {
+  @Column()
+  loyaltyProgramId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  name: string;
 
-    @Column()
-    loyaltyProgramId: string;
+  @Column()
+  type: string;
 
-    @Column()
-    name: string;
+  @Column()
+  cost: number;
 
-    @Column()
-    type: string;//Gift, Discount by Percentage, Discount by Value
-
-    @Column()
-    cost: number;
-
-    @ManyToOne(() => LoyaltyProgram, loyaltyProgram => loyaltyProgram.rewards)
-    loyaltyProgram: LoyaltyProgram;
+  @ManyToOne(() => LoyaltyProgram, (loyaltyProgram) => loyaltyProgram.rewards)
+  loyaltyProgram: LoyaltyProgram;
 }

@@ -1,1 +1,1 @@
-export * from './stock-client.service'
+export * from './stock-client.service';

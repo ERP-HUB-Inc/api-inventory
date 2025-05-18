@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { EODLog } from '../entities/eod-log.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
-import { EODLog } from '../entities/eod-log.entity';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class EODLogRepository {
@@ -22,13 +22,13 @@ export class EODLogRepository {
 
   constructor(
     @InjectRepository(EODLog)
-    public readonly repository: Repository<EODLog>
+    public readonly repository: Repository<EODLog>,
   ) {}
 
   findTodayEOD(itemId: string, currentDate: string): Promise<EODLog> {
     const startDate = new Date(`${currentDate}T00:00:00`);
     const endDate = new Date(`${currentDate}T23:59:59`);
-  
+
     return this.repository.findOne({
       where: {
         itemId,

@@ -1,2 +1,2 @@
-export * from './config.entity'
-export * from './session.entity'
+export * from './config.entity';
+export * from './session.entity';

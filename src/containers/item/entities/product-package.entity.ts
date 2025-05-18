@@ -1,31 +1,22 @@
-import {
-    Column,
-    Entity,
-    ManyToOne,
-    OneToOne,
-    JoinColumn
-} from "typeorm";
-import ProductVariant from "./ProductVariant";
-import Model from "../../../core/common/models/Model";
+import { Column, Entity, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+import { BaseEntity } from '@common/entities/base.entity';
+import { ProductVariant } from './product-variant.entity';
 
-@Entity("ProductPackage")
-export default class ProductPackage extends Model {
-    @Column()
-    clientId: string;
+@Entity('ProductPackage')
+export class ProductPackage extends BaseEntity {
+  @Column()
+  productId: string;
 
-    @Column()
-    productId: string;
+  @Column()
+  rawProductId: string;
 
-    @Column()
-    rawProductId: string;
+  @Column()
+  quantity: number;
 
-    @Column()
-    quantity: number;
+  @OneToOne(() => ProductVariant)
+  @JoinColumn()
+  rawProduct: ProductVariant;
 
-    @OneToOne(() => ProductVariant)
-    @JoinColumn()
-    rawProduct: ProductVariant;
-
-    @ManyToOne(() => ProductVariant, productVariant => productVariant.productPackages)
-    product: ProductVariant;
+  @ManyToOne(() => ProductVariant, (productVariant) => productVariant.productPackages)
+  product: ProductVariant;
 }

@@ -1,53 +1,43 @@
 import {
-    Column,
-    Entity,
-    OneToMany,
-    PrimaryColumn,
-    OneToOne,
-    JoinColumn
-} from "typeorm";
-import { StockCount } from ".";
-import Product from "../../item/entities/Product";
-import ProductVariant from "../../item/entities/ProductVariant";
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { StockCount } from '.';
+import { BaseEntity } from '@common/entities/base.entity';
+import { Product } from '@item/entities/product.entity';
+import { ProductVariant } from '@item/entities/index';
 
-@Entity("StockCountEntry")
-export class StockCountEntry {
+@Entity('StockCountEntry')
+export class StockCountEntry extends BaseEntity {
+  @Column()
+  stockCountId: string;
 
-    @PrimaryColumn()
-    id: string;
+  @Column()
+  productId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  productVariantId: string;
 
-    @Column()
-    stockCountId: string;
+  @Column()
+  expected: number;
 
-    @Column()
-    productId: string;
+  @Column()
+  count: number;
 
-    @Column()
-    productVariantId: string;
+  @Column()
+  cost: number;
 
-    @Column()
-    expected: number;
+  @OneToMany(() => StockCount, (stockCount) => stockCount.stockCountEntries)
+  stockCount: StockCount;
 
-    @Column()
-    count: number;
+  @OneToOne(() => Product)
+  @JoinColumn()
+  product: Product;
 
-    @Column()
-    cost: number;
-
-    @Column()
-    status: string;//UNCOUNTED, COUNTED, INCLUDE, EXCLUDE
-
-    @OneToMany(() => StockCount, stockCount => stockCount.stockCountEntries)
-    stockCount: StockCount;
-
-    @OneToOne(() => Product)
-    @JoinColumn()
-    product: Product;
-
-    @OneToOne(() => ProductVariant)
-    @JoinColumn()
-    productVariant: ProductVariant;
+  @OneToOne(() => ProductVariant)
+  @JoinColumn()
+  productVariant: ProductVariant;
 }

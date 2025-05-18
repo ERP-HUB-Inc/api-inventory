@@ -18,7 +18,7 @@
       "@const/*": ["common/const/*"],
       "@controllers/*": ["controllers/*"],
       "@services/item/*": ["containers/item/services/*"],
-      "@entities/item/*": ["containers/item/entities/*"],
+      "@item/entities/*": ["containers/item/entities/*"],
       "@entities/stock/*": ["containers/stock/entities/*"],
       "@entities/end-of-day-log/*": ["containers/end-of-day-log/entities/*"],
       "@entities/purchase/*": ["containers/purchase/entities/*"],

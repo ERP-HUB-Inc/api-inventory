@@ -1,19 +1,12 @@
-import { EntityRepository } from "typeorm";
-import Condition from "../entities/Condition";
-import BaseRepository from "../../../core/common/repositories/BaseRepository";
-import Filter from "../../../core/common/filters";
-import Utils from "../../../core/common/utils";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { BaseRepository } from '@common/repositories/base.repository';
+import { ProductCondition } from '@item/entities/condition.entity';
 
-@EntityRepository(Condition)
-export default class BrandRepository extends BaseRepository<Condition> {
-
-    entityName: string = "Condition";
-
-    defaultOrder: string[] = ["name", "ASC"];
-
-    selectField: string[] = [
-        "id",
-        "clientId",
-        "name"
-    ];
+@Injectable()
+export class ConditionRepository extends BaseRepository<ProductCondition> {
+  constructor(@InjectRepository(ProductCondition) readonly repository: Repository<ProductCondition>) {
+    super(repository);
+  }
 }

@@ -1,83 +1,82 @@
+import { Injectable } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
+import { CategoryRepository } from 'containers/item/repositories';
+import { JoinOptions } from 'typeorm';
+import { CategoryCreateDto, CategoryResponseDto } from '../dto';
 import {
-    JoinOptions, getCustomRepository
-} from "typeorm";
-import { Service } from "typedi";
-import { plainToInstance } from "class-transformer";
-import CategoryRepository from "../repositories/CategoryRepository";
-import Filter from "../../../core/common/filters";
-import { 
-    CategoryCreateDto, 
-    CategoryResponseDto 
-} from "../dto";
-import { 
-    fromCategoryCreateDtoToCategory, 
+    fromCategoryCreateDtoToCategory,
     fromCategoryToCategoryResponseDto,
-    fromCategoryToCategoryResponsesDto
-} from "../mappers";
+    fromCategoryToCategoryResponsesDto,
+} from '../mappers';
+import { FilterDto } from '@common/dto';
 
-@Service()
-export default class CategoryService {
-    private repository: CategoryRepository;
+@Injectable()
+export class CategoryService {
+  constructor(private readonly repository: CategoryRepository) {}
 
-    constructor() {
-        this.repository = getCustomRepository(CategoryRepository);
-    }
+  responses(
+    datas: CategoryResponseDto[],
+    total: number = datas.length,
+    limit: number = 0,
+    offset: number = 0,
+  ) {
+    return {
+      data: datas,
+      pagination: {
+        total,
+        offset,
+        limit,
+      },
+    };
+  }
 
-    response(data: CategoryResponseDto) {
-        return {
-            data
-        }
-    }
+  async findMany(filter: FilterDto) {
+    const results = await this.repository.(filter);
+    return this.responses(
+      fromCategoryToCategoryResponsesDto(results[0]),
+      results[1],
+      filter.limit,
+      filter.offset,
+    );
+  }
 
-    responseT<D>(data: D | D[], user?: any) {
-        return {
-            data,
-            user
-        }
-    }
+  async findOne(
+    condition: Object,
+    select?: string[],
+    relations?: any,
+    joinOptions?: JoinOptions,
+  ) {
+    const result = await this.repository.findOneByFieldName(
+      condition,
+      select,
+      relations,
+      joinOptions,
+    );
+    return fromCategoryToCategoryResponseDto(result);
+  }
 
-    responses(datas: CategoryResponseDto[], total: number = datas.length, limit: number = 0, offset: number = 0) {
-        return {
-            data: datas,
-            pagination: {
-                total,
-                offset,
-                limit
-            }
-        }
-    }
+  async create(dto: CategoryCreateDto, columnCheckExist?: Object) {
+    const category = fromCategoryCreateDtoToCategory(dto);
+    const createdCategory = await this.repository.create(
+      category,
+      columnCheckExist,
+    );
 
-    async findMany(filter: Filter) {
-        const results = await this.repository.findMany(filter);
-        return this.responses(fromCategoryToCategoryResponsesDto(results[0]), results[1], filter.limit, filter.offset);
-    }
+    return fromCategoryToCategoryResponseDto(createdCategory);
+  }
 
-    async findOne(
-        condition: Object,
-        select?: string[],
-        relations?: any,
-        joinOptions?: JoinOptions
-    ) {
-        const result = await this.repository.findOneByFieldName(condition, select, relations, joinOptions);
-        return this.response(fromCategoryToCategoryResponseDto(result));
-    }
+  async update(data: Object, condition: Object) {
+    return plainToInstance(
+      CategoryResponseDto,
+      await this.repository.update(data, condition),
+    );
+  }
 
-    async create(dto: CategoryCreateDto, columnCheckExist?: Object) {
-        const category = fromCategoryCreateDtoToCategory(dto);
-        const createdCategory = await this.repository.create(category, columnCheckExist);
+  archive(data: string) {
+    return this.repository.archive(data);
+  }
 
-        return this.response(fromCategoryToCategoryResponseDto(createdCategory));
-    }
-
-    async update(data: Object, condition: Object) {
-        return this.response(plainToInstance(CategoryResponseDto, await this.repository.update(data, condition)));
-    }
-
-    archive(data: string) {
-        return this.repository.archive(data);
-    }
-
-    changeStatus(ids: string) {
-        return this.repository.changeStatus(ids);
-    }
+  changeStatus(ids: string) {
+    return this.repository.changeStatus(ids);
+  }
 }

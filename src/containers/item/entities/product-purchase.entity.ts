@@ -1,36 +1,26 @@
-import {
-    Column,
-    Entity,
-    PrimaryColumn
-} from "typeorm";
+import { BaseEntity } from '@common/entities/base.entity';
+import { Column, Entity } from 'typeorm';
 
-@Entity("ProductPurchase")
-export default class ProductPurchase {
-    @PrimaryColumn()
-    id: string;
+@Entity('ProductPurchase')
+export class ProductPurchase extends BaseEntity {
+  @Column()
+  purchaseOrderId: string;
 
-    @Column()
-    clientId: string;
+  @Column()
+  supplierId: string;
 
-    @Column()
-    purchaseOrderId: string;
+  @Column()
+  productVariantId: string;
 
-    @Column()
-    supplierId: string;
+  @Column()
+  orderDate: Date;
 
-    @Column()
-    productVariantId: string;
+  @Column()
+  quantity: number;
 
-    @Column()
-    orderDate: Date;
+  @Column()
+  cost: number;
 
-    @Column()
-    quantity: number;
-
-    @Column()
-    cost: number;
-
-    @Column()
-    expiredDate: Date;
-    
+  @Column()
+  expiredDate: Date;
 }

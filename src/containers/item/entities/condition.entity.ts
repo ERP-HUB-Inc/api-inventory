@@ -1,20 +1,16 @@
-import {
-    Column,
-    Entity,
-    PrimaryColumn
-} from "typeorm";
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity("ProductCondition")
-export default class Condition {
-    @PrimaryColumn()
-    id: string;
-    
-    @Column()
-    clientId: string;
+@Entity('ProductCondition')
+export class ProductCondition {
+  @PrimaryColumn()
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  clientId: string;
 
-    @Column()
-    status: number;
+  @Column()
+  name: string;
+
+  @Column()
+  status: number;
 }
